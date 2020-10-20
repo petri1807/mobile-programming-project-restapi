@@ -31,8 +31,7 @@ public class HelloAppEngine extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
-//		String breed = request.getParameter("breed");
-//		String weight = request.getParameter("weight");
+
 //
 //		ArrayList<Fish> fishlist = new ArrayList<>();
 //		util.HTML.printStart(out);
