@@ -153,8 +153,8 @@ public class ActivityService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/timeonactivities")
 	public ArrayList<Activity> timeOnActivities() {
-		String sqlSums = "select sum(timeSpent) from activity where activityType=Work union all select sum(timeSpent) from activity where activityType=Meeting union all select sum(timeSpent) from activity where activityType=Workout union all select sum(timeSpent) from activity where activityType=Personal";
-		//String sqlMeeting = "select sum(timeSpent) from activity where activityType=Meeting";
+		//String sqlSums = "select sum(timeSpent) as from activity where activityType=Work union all select sum(timeSpent) from activity where activityType=Meeting union all select sum(timeSpent) from activity where activityType=Workout union all select sum(timeSpent) from activity where activityType=Personal";
+		String sqlSums = "select sum(timeSpent) as TOTAL_TIME from activity group by activityType";
 		//String sqlWorkout = "select sum(timeSpent) from activity where activityType=Workout";
 		//String sqlPersonal = "select sum(timeSpent) from activity where activityType=Personal";
 		
