@@ -49,7 +49,8 @@ public class FloorballService {
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, player.getName());
+			pstmt.setInt(1, player.getId());
+			pstmt.setString(2, player.getName());
 
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -91,6 +92,7 @@ public class FloorballService {
 			RS = stmt.executeQuery(sql);
 			while (RS.next()) {
 				FloorballPlayer p = new FloorballPlayer();
+				p.setId(RS.getInt("id"));
 				p.setName(RS.getString("name"));
 
 				list.add(p);
