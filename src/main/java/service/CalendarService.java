@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,14 +15,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.google.appengine.api.utils.SystemProperty;
-import java.sql.Statement;
 
 import conn.Connections;
 import data.CalendarEvent;
@@ -114,6 +110,52 @@ public class CalendarService {
 	@Path("/getallcalendarevents")
 	public ArrayList<CalendarEvent> getAllCalendarEvents() {
 		String sql = "select * from calendarEvent";
+		ResultSet RS = null;
+		ArrayList<CalendarEvent> list = new ArrayList<>();
+
+		Connection conn = null;
+		try {
+			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+				conn = Connections.getProductionConnection();
+			} else {
+				conn = Connections.getDevConnection();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			RS = stmt.executeQuery(sql);
+			while (RS.next()) {
+				CalendarEvent c = new CalendarEvent();
+				c.setId(RS.getInt("id"));
+				c.setDate(RS.getString("date"));
+				c.setTimeStart(RS.getString("timeStart"));
+				c.setTimeEnd(RS.getString("timeEnd"));
+				c.setTopic(RS.getString("topic"));
+				c.setMessage(RS.getString("message"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/gettodayscalendarevents/{p1}/{p2}")
+	public ArrayList<CalendarEvent> getTodaysCalendarEvents(@PathParam("p1") int id, @PathParam("p2") String date) {
+		String sql = "select * from calendarEvent where userId=" + id + " and date=" + date;
 		ResultSet RS = null;
 		ArrayList<CalendarEvent> list = new ArrayList<>();
 
