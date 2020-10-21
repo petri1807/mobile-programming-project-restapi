@@ -34,7 +34,7 @@ public class CalendarService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addcalendarevent")
 	public CalendarEvent addCalendarEvent(CalendarEvent ce) {
-		String sql = "insert into calendarEvent(userId, date, timeStart, timeEnd, topic, message) values(?,?,?,?,?,?)";
+		String sql = "insert into players(userId, date, timeStart, timeEnd, topic, message) values(?,?,?,?,?,?)";
 
 		Connection conn = null;
 		try {
