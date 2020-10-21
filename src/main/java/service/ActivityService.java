@@ -153,10 +153,10 @@ public class ActivityService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/timeonactivities")
 	public ArrayList<Activity> timeOnActivities() {
-		String sqlWork = "select sum(timeSpent) from activity where activityType=Work";
-		String sqlMeeting = "select sum(timeSpent) from activity where activityType=Meeting";
-		String sqlWorkout = "select sum(timeSpent) from activity where activityType=Workout";
-		String sqlPersonal = "select sum(timeSpent) from activity where activityType=Personal";
+		String sqlSums = "select sum(timeSpent) from activity where activityType=Work union all select sum(timeSpent) from activity where activityType=Meeting union all select sum(timeSpent) from activity where activityType=Workout union all select sum(timeSpent) from activity where activityType=Personal";
+		//String sqlMeeting = "select sum(timeSpent) from activity where activityType=Meeting";
+		//String sqlWorkout = "select sum(timeSpent) from activity where activityType=Workout";
+		//String sqlPersonal = "select sum(timeSpent) from activity where activityType=Personal";
 		
 		ResultSet RS = null;
 		Connection conn = null;
@@ -175,7 +175,7 @@ public class ActivityService {
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			RS = stmt.executeQuery(sqlWork);
+			RS = stmt.executeQuery(sqlSums);
 			while (RS.next()) {
 				Activity a = new Activity();
 				a.setId(RS.getInt("id"));
@@ -189,6 +189,7 @@ public class ActivityService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		/*
 		try {
 			stmt = conn.createStatement();
 			RS = stmt.executeQuery(sqlMeeting);
@@ -236,7 +237,7 @@ public class ActivityService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} */
 		if (conn != null) {
 			try {
 				conn.close();
