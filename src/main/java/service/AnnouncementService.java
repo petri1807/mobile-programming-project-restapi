@@ -68,5 +68,7 @@ public class AnnouncementService {
 		}
 		return list;
 	}
+	
+	
 
 }
