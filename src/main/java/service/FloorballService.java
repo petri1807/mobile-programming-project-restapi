@@ -1,7 +1,6 @@
 package service;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,7 +19,6 @@ import javax.ws.rs.core.MediaType;
 import com.google.appengine.api.utils.SystemProperty;
 
 import conn.Connections;
-import data.CalendarEvent;
 import data.FloorballPlayer;
 
 @Path("/floorballservice")

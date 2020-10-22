@@ -20,7 +20,7 @@ import com.google.appengine.api.utils.SystemProperty;
 
 import conn.Connections;
 import data.Activity;
-import data.CalendarEvent;
+
 
 @Path("/activityservice")
 public class ActivityService {
