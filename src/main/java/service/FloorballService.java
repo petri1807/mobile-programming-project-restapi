@@ -33,7 +33,7 @@ public class FloorballService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addplayer")
 	public FloorballPlayer addPlayer(FloorballPlayer player) {
-		String sql = "insert into players(name) values(?)";
+		String sql = "insert into players(player) values(?)";
 
 		Connection conn = null;
 		try {
