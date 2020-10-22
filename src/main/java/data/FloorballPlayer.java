@@ -2,7 +2,7 @@ package data;
 
 public class FloorballPlayer {
 	private int id;
-	private String name;
+	private String player;
 	
 	public int getId() {
 		return id;
@@ -11,13 +11,13 @@ public class FloorballPlayer {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	public String getPlayer() {
+		return player;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPlayer(String player) {
+		this.player = player;
 	}
 	public String toString() {
-		return id+" "+name+"\n";
+		return id+" "+player+"\n";
 	}
 }
