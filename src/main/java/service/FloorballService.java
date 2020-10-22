@@ -49,8 +49,7 @@ public class FloorballService {
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, player.getId());
-			pstmt.setString(2, player.getPlayer());
+			pstmt.setString(1, player.getPlayer());
 
 			pstmt.execute();
 		} catch (SQLException e) {
